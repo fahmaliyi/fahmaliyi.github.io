@@ -17,16 +17,31 @@
         color-scheme: light dark;
 
         /* Semantic color tokens using oklch() for perceptual uniformity */
-        --color-bg: light-dark(oklch(0.99 0.005 260), oklch(0.14 0.005 260));
-        --color-text-primary: light-dark(oklch(0.15 0.01 260), oklch(0.98 0.005 260));
-        --color-text-secondary: light-dark(oklch(0.40 0.01 260), oklch(0.75 0.01 260));
-        --color-text-muted: light-dark(oklch(0.60 0.01 260), oklch(0.65 0.01 260));
-        --color-border: light-dark(oklch(0.90 0.005 260), oklch(0.22 0.01 260));
-        --color-surface-card: light-dark(oklch(0.975 0.005 260), oklch(0.16 0.005 260));
-        --color-card-border: light-dark(oklch(0.93 0.005 260), oklch(0.20 0.01 260));
+        --color-bg: light-dark(#fcfcfc, #101010);
+        --color-text-primary: light-dark(
+          oklch(0.18 0.005 80),
+          oklch(0.98 0.002 80)
+        );
+        --color-text-secondary: light-dark(
+          oklch(0.42 0.005 80),
+          oklch(0.78 0.005 80)
+        );
+        --color-text-muted: light-dark(
+          oklch(0.6 0.005 80),
+          oklch(0.65 0.005 80)
+        );
+        --color-border: light-dark(oklch(0.9 0.002 80), oklch(0.24 0.004 80));
+        --color-surface-card: light-dark(#ffffff, #0b0b0b);
+        --color-card-border: light-dark(
+          oklch(0.88 0.002 80),
+          oklch(0.28 0.004 80)
+        );
         --color-accent: light-dark(oklch(0.55 0.15 260), oklch(0.65 0.15 260));
-        --color-selection-bg: var(--color-accent);
-        --color-selection-text: light-dark(oklch(1 0 0), oklch(0.1 0 0));
+        --color-selection-bg: light-dark(
+          oklch(0.92 0.04 260),
+          oklch(0.25 0.04 260)
+        );
+        --color-selection-text: var(--color-text-primary);
 
         /* ── Type scale ── role-based: size / line-height / weight */
         --text-title: 1.75rem; /* 28px — h1 */
@@ -217,18 +232,16 @@
 
       .social-link {
         display: inline-flex;
-        align-items: baseline;
-        gap: 0.35em;
-        padding: 4px 6px;
+        align-items: center;
+        vertical-align: -0.1em; /* Optically drops the flex container to match the surrounding text baseline */
+        gap: 0.3em;
+        padding: 2px 6px;
         margin-inline: -6px;
         border-radius: 4px;
         color: var(--color-text-primary);
         font-weight: 500;
-        text-decoration: underline;
-        text-decoration-color: var(--color-border);
-        text-underline-offset: 3px;
-        text-decoration-thickness: 1px;
-        transition-property: color, text-decoration-color, background-color;
+        text-decoration: none;
+        transition-property: color, background-color;
         transition-duration: 0.2s;
         transition-timing-function: ease;
       }
@@ -236,13 +249,14 @@
       .social-link .icon {
         width: 0.85em;
         height: 0.85em;
-        transform: translateY(0.08em);
         flex-shrink: 0;
+        /* translateY removed since align-items: center perfectly centers it now */
       }
 
       @media (hover: hover) {
         .social-link:hover {
-          text-decoration-color: var(--color-text-primary);
+          background-color: var(--color-surface-hover);
+          color: var(--color-text-secondary);
         }
       }
 
@@ -275,22 +289,38 @@
         position: relative;
         display: flex;
         flex-direction: column;
-        padding: var(--space-xs);
+        padding: 6px; /* Increased slightly to give content breathing room from inner border */
         border-radius: 12px;
-        background-color: var(--color-surface-card);
-        /* Use layered shadow for concentric depth and inner structural border instead of ::before element */
-        box-shadow: 0 0 0 1px var(--color-card-border), inset 0 0 0 1px var(--color-bg);
-        transition-property: box-shadow;
+        border: 1px solid var(--color-card-border);
+        background-color: var(--color-bg); /* Gap color matches page canvas */
+        isolation: isolate; /* Create stacking context so ::before sits exactly between gap and content */
+        transition-property: border-color, box-shadow;
+        transition-duration: 0.4s;
+        transition-timing-function: ease;
+      }
+
+      .item::before {
+        content: "";
+        position: absolute;
+        inset: 3px; /* Decreased slightly per user request */
+        border: 1px solid var(--color-card-border);
+        border-radius: 9px; /* Outer 12px = Inner 9px + Padding 3px */
+        background-color: var(--color-surface-card); /* Inner card color */
+        pointer-events: none;
+        z-index: -1; /* Placed behind the content but over the gap */
+        transition-property: border-color;
         transition-duration: 0.4s;
         transition-timing-function: ease;
       }
 
       @media (hover: hover) {
         .item:hover {
-          box-shadow: 
-            0 0 0 1px var(--color-border), 
-            inset 0 0 0 1px var(--color-bg),
-            0 8px 24px light-dark(oklch(0 0 0 / 0.04), oklch(0 0 0 / 0.2));
+          border-color: var(--color-border);
+          box-shadow: 0 8px 24px
+            light-dark(oklch(0 0 0 / 0.04), oklch(0 0 0 / 0.2));
+        }
+        .item:hover::before {
+          border-color: var(--color-border);
         }
       }
 
@@ -329,14 +359,18 @@
       }
 
       .item-title {
-        font-weight: 500;
-        line-height: var(--leading-body);
+        font-size: var(--text-sm);
+        font-weight: 600; /* Semi-bold */
+        line-height: var(--leading-body-sm);
         color: var(--color-text-primary);
       }
 
       .item-date {
         font-size: var(--text-sm);
-        color: var(--color-text-muted);
+        font-weight: 400;
+        color: var(
+          --color-text-secondary
+        ); /* Slightly muted, higher contrast than muted */
         white-space: nowrap;
       }
 
@@ -351,7 +385,7 @@
         .item:hover .card-icon {
           opacity: 1;
           translate: 0 0;
-          color: var(--color-text-primary);
+          color: var(--color-text-secondary);
         }
       }
 
@@ -393,7 +427,7 @@
       .signature {
         inline-size: 3.5rem;
         block-size: auto;
-        opacity: 0.8; 
+        opacity: 0.8;
       }
 
       @media (prefers-color-scheme: dark) {
@@ -579,12 +613,12 @@
               </div>
               <div class="card-icon" aria-hidden="true">
                 <svg
-                  width="18"
-                  height="18"
+                  width="16"
+                  height="16"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"
+                  stroke-width="1.5"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 >
@@ -609,12 +643,12 @@
               </div>
               <div class="card-icon" aria-hidden="true">
                 <svg
-                  width="18"
-                  height="18"
+                  width="16"
+                  height="16"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"
+                  stroke-width="1.5"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 >
@@ -635,16 +669,16 @@
             <div class="card-bottom">
               <div class="card-text">
                 <span class="item-title">TrackDesk</span>
-                <span class="item-date">Desktop</span>
+                <span class="item-date">Electron desktop app</span>
               </div>
               <div class="card-icon" aria-hidden="true">
                 <svg
-                  width="18"
-                  height="18"
+                  width="16"
+                  height="16"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"
+                  stroke-width="1.5"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 >
