@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fahmi Aliyi — Software Developer</title>
+    <meta
+      name="description"
+      content="Software developer focused on backend architecture, web applications, and mobile engineering."
+    />
+
+    <!-- System font stack optimized for clean, modern rendering -->
+    <style>
+      :root {
+        --bg: #0a0a0a;
+        --text-primary: #ededed;
+        --text-secondary: #888888;
+        --text-muted: #555555;
+        --border: #222222;
+        --card-hover: #141414;
+        --accent: #3b82f6;
+      }
+
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #ffffff;
+          --text-primary: #111111;
+          --text-secondary: #666666;
+          --text-muted: #999999;
+          --border: #e5e5e5;
+          --card-hover: #fafafa;
+          --accent: #2563eb;
+        }
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: var(--bg);
+        color: var(--text-primary);
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        font-size: 15px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        padding: 4rem 1.5rem;
+      }
+
+      main {
+        max-width: 620px;
+        margin: 0 auto;
+      }
+
+      /* Header / Bio */
+      header {
+        margin-bottom: 3.5rem;
+      }
+
+      h1 {
+        font-size: 1.25rem;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+        margin-bottom: 0.75rem;
+      }
+
+      p {
+        color: var(--text-secondary);
+        margin-bottom: 1rem;
+      }
+
+      p strong {
+        color: var(--text-primary);
+        font-weight: 500;
+      }
+
+      /* Links / Socials */
+      .social-links {
+        display: flex;
+        gap: 1.25rem;
+        list-style: none;
+        margin-top: 1.25rem;
+      }
+
+      a {
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      a:hover {
+        color: var(--text-secondary);
+      }
+
+      .external-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        color: var(--text-secondary);
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 1px;
+        transition: all 0.2s ease;
+      }
+
+      .external-link:hover {
+        color: var(--text-primary);
+        border-color: var(--text-primary);
+      }
+
+      /* Sections */
+      section {
+        margin-bottom: 3rem;
+      }
+
+      h2 {
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-muted);
+        margin-bottom: 1.25rem;
+      }
+
+      /* Project / Writing Lists */
+      .item-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+
+      .item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        padding: 0.85rem 1rem;
+        margin: 0 -1rem;
+        border-radius: 6px;
+        transition: background-color 0.15s ease;
+      }
+
+      .item:hover {
+        background-color: var(--card-hover);
+      }
+
+      .item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+
+      .item-title {
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+
+      .item-date {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+
+      .item-desc {
+        font-size: 0.925rem;
+        color: var(--text-secondary);
+      }
+
+      /* Footer */
+      footer {
+        margin-top: 4rem;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        border-top: 1px solid var(--border);
+        padding-top: 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <!-- Header Section -->
+      <header>
+        <h1>Fahmi Aliyi</h1>
+        <p>
+          Software developer specializing in backend architecture, web
+          applications, and mobile systems. Deeply focused on clean code,
+          resilient multi-tenant infrastructure, and refined interface design.
+        </p>
+
+        <ul class="social-links">
+          <li>
+            <a
+              href="https://github.com/yourusername"
+              target="_blank"
+              class="external-link"
+              >GitHub ↗</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://linkedin.com/in/yourusername"
+              target="_blank"
+              class="external-link"
+              >LinkedIn ↗</a
+            >
+          </li>
+          <li>
+            <a href="mailto:your.email@example.com" class="external-link"
+              >Email ↗</a
+            >
+          </li>
+        </ul>
+      </header>
+
+      <!-- Projects Section -->
+      <section>
+        <h2>Projects</h2>
+        <div class="item-list">
+          <a
+            href="https://github.com/yourusername/oklo"
+            target="_blank"
+            class="item"
+          >
+            <div class="item-header">
+              <span class="item-title">Oklo</span>
+              <span class="item-date">Flutter</span>
+            </div>
+            <p class="item-desc">
+              A cross-platform mobile application featuring custom profiles,
+              fluid layout components, and Riverpod state architecture.
+            </p>
+          </a>
+
+          <a
+            href="https://github.com/yourusername/trackly"
+            target="_blank"
+            class="item"
+          >
+            <div class="item-header">
+              <span class="item-title">Trackly</span>
+              <span class="item-date">Next.js</span>
+            </div>
+            <p class="item-desc">
+              A minimal metric dashboard web application built with Next.js,
+              Tailwind CSS, and headless UI primitives.
+            </p>
+          </a>
+
+          <a
+            href="https://github.com/yourusername/trackdesk"
+            target="_blank"
+            class="item"
+          >
+            <div class="item-header">
+              <span class="item-title">TrackDesk</span>
+              <span class="item-date">Desktop</span>
+            </div>
+            <p class="item-desc">
+              A desktop application utility featuring customized native-feel
+              titlebar controls and window management logic.
+            </p>
+          </a>
+        </div>
+      </section>
+
+      <!-- Focus & Tech Stack Section -->
+      <section>
+        <h2>Expertise</h2>
+        <div class="item-list">
+          <div class="item" style="padding: 0.5rem 0; background: transparent">
+            <div class="item-header">
+              <span class="item-title">Backend & Infrastructure</span>
+            </div>
+            <p class="item-desc">
+              Go, multi-tenant B2B architectures, atomic stock ledgers, and
+              supply chain routing pipelines.
+            </p>
+          </div>
+          <div class="item" style="padding: 0.5rem 0; background: transparent">
+            <div class="item-header">
+              <span class="item-title">Web & Mobile Engineering</span>
+            </div>
+            <p class="item-desc">
+              Next.js, React, TypeScript, Tailwind CSS, Supabase, and
+              cross-platform Flutter development.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer>
+        <p>© 2026 Fahmi Aliyi. Designed with minimal craft.</p>
+      </footer>
+    </main>
+  </body>
+</html>
