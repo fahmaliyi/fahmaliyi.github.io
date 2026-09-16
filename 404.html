@@ -8,268 +8,160 @@
     <style>
       :root {
         color-scheme: light dark;
-        --ink: light-dark(#101010, #fcfcfc);
-        --paper: light-dark(#fcfcfc, #101010);
-        --pixel: clamp(3px, 0.5vw, 6px);
-        --pointer-x: 50vw;
-        --pointer-y: 50vh;
-        --grid-x: 0px;
-        --grid-y: 0px;
-        --look-x: 0px;
-        --look-y: 0px;
+        --color-bg: light-dark(#fcfcfc, #101010);
+        --color-text-primary: light-dark(
+          oklch(0.18 0.005 80),
+          oklch(0.98 0.002 80)
+        );
+        --color-text-secondary: light-dark(
+          oklch(0.42 0.005 80),
+          oklch(0.78 0.005 80)
+        );
+        --color-border: light-dark(oklch(0.9 0.002 80), oklch(0.24 0.004 80));
+        --color-surface-card: light-dark(#ffffff, #0b0b0b);
+        --color-accent: light-dark(oklch(0.55 0.15 260), oklch(0.65 0.15 260));
+        --color-selection-bg: light-dark(
+          oklch(0.92 0.04 260),
+          oklch(0.25 0.04 260)
+        );
+        --space-sm: 0.5rem;
+        --space-md: 1rem;
+        --space-lg: 1.5rem;
+        --space-xl: 2rem;
+        --space-2xl: 3rem;
       }
 
-      * {
+      *,
+      *::before,
+      *::after {
         box-sizing: border-box;
       }
 
       body {
+        display: grid;
         min-block-size: 100vh;
+        place-items: center;
         margin: 0;
-        overflow: hidden;
-        isolation: isolate;
-        background-color: var(--paper);
-        background-image:
-          linear-gradient(var(--ink) 1px, transparent 1px),
-          linear-gradient(90deg, var(--ink) 1px, transparent 1px);
-        background-position: var(--grid-x) var(--grid-y);
-        background-size: 24px 24px;
-        color: var(--ink);
-        font-family: ui-monospace, "Cascadia Code", "SFMono-Regular", Menlo, Consolas, monospace;
-        -webkit-font-smoothing: none;
-        text-rendering: geometricPrecision;
-      }
-
-      body::before {
-        position: fixed;
-        inset: 0;
-        z-index: 0;
-        content: "";
-        pointer-events: none;
-        background: radial-gradient(
-          circle 9rem at var(--pointer-x) var(--pointer-y),
-          transparent 0 20%,
-          var(--paper) 72%
-        );
+        padding: var(--space-lg);
+        background: var(--color-bg);
+        color: var(--color-text-primary);
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        font-size: 1.125rem;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
 
       main {
-        display: grid;
-        position: relative;
-        z-index: 1;
-        min-block-size: 100vh;
-        place-items: center;
-        padding: clamp(1.5rem, 6vw, 5rem) 1.5rem;
+        inline-size: min(100%, 42rem);
       }
 
-      .content {
-        inline-size: min(100%, 44rem);
+      article {
+        padding: clamp(var(--space-xl), 7vw, var(--space-2xl));
+        border: 1px solid var(--color-border);
+        border-radius: 12px;
+        background: var(--color-surface-card);
       }
 
-      .status {
-        margin: 0 0 1rem;
-        font-size: clamp(0.75rem, 2vw, 1rem);
-        font-weight: 700;
-        letter-spacing: 0.14em;
+      .eyebrow {
+        margin: 0 0 var(--space-sm);
+        color: var(--color-text-secondary);
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
-      }
-
-      .error-code {
-        display: block;
-        margin: 0;
-        font-size: clamp(5rem, 24vw, 13rem);
-        font-weight: 900;
-        letter-spacing: -0.14em;
-        line-height: 0.8;
-        text-shadow: var(--pixel) var(--pixel) 0 var(--paper), calc(var(--pixel) * 2) calc(var(--pixel) * 2) 0 var(--ink);
       }
 
       h1 {
-        max-inline-size: 18ch;
-        margin: 1.5rem 0 0;
-        font-size: clamp(1.5rem, 5vw, 2.5rem);
+        margin: 0;
+        font-size: clamp(2rem, 8vw, 3.5rem);
         line-height: 1.1;
-        text-transform: uppercase;
+        letter-spacing: -0.04em;
+        text-wrap: balance;
       }
 
-      .message {
-        max-inline-size: 42ch;
-        margin: 1.25rem 0 0;
-        font-size: clamp(1rem, 2vw, 1.125rem);
-        line-height: 1.6;
+      p {
+        max-inline-size: 35rem;
+        margin: var(--space-md) 0 0;
+        color: var(--color-text-secondary);
+        text-wrap: pretty;
       }
 
       .home-link {
         display: inline-flex;
         align-items: center;
-        gap: 0.75rem;
-        min-block-size: 3rem;
-        margin-top: 2rem;
-        padding: 0.75rem 1rem;
-        border: 2px solid var(--ink);
-        box-shadow: 4px 4px 0 var(--ink);
-        color: var(--paper);
-        background: var(--ink);
+        min-block-size: 2.75rem;
+        margin-top: var(--space-xl);
+        padding: 0.5rem 0.875rem;
+        border-radius: 6px;
+        background: var(--color-text-primary);
+        color: var(--color-bg);
         font-size: 1rem;
-        font-weight: 700;
+        font-weight: 600;
         text-decoration: none;
-        text-transform: uppercase;
-      }
-
-      .home-link::before {
-        content: "←";
-        font-size: 1.25em;
+        transition: opacity 0.2s ease;
       }
 
       .home-link:hover {
-        color: var(--ink);
-        background: var(--paper);
-      }
-
-      .home-link:active {
-        translate: 4px 4px;
-        box-shadow: none;
+        opacity: 0.82;
       }
 
       .home-link:focus-visible {
-        outline: 3px solid var(--ink);
-        outline-offset: 5px;
+        outline: 2px solid var(--color-accent);
+        outline-offset: 3px;
       }
 
-      .rover {
-        position: fixed;
-        inset: auto 1.5rem 1.5rem auto;
-        inline-size: 112px;
-        block-size: 84px;
-        z-index: 1;
-        pointer-events: none;
-        filter: drop-shadow(4px 4px 0 var(--ink));
+      ::selection {
+        background: var(--color-selection-bg);
+        color: var(--color-text-primary);
       }
 
-      .rover-body,
-      .rover-eye,
-      .rover-pupil,
-      .rover-wheel {
-        position: absolute;
-        display: block;
-        background: var(--ink);
-      }
-
-      .rover-body {
-        inset: 20px 8px 16px;
-        border: 8px solid var(--ink);
-        background: var(--paper);
-      }
-
-      .rover-eye {
-        inset-block-start: 17px;
-        inline-size: 20px;
-        block-size: 20px;
-        background: var(--paper);
-      }
-
-      .rover-eye.left {
-        inset-inline-start: 25px;
-      }
-
-      .rover-eye.right {
-        inset-inline-end: 25px;
-      }
-
-      .rover-pupil {
-        inset: 7px;
-        inline-size: 7px;
-        block-size: 7px;
-        translate: var(--look-x) var(--look-y);
-      }
-
-      .rover-wheel {
-        inset-block-end: 6px;
-        inline-size: 18px;
-        block-size: 10px;
-      }
-
-      .rover-wheel.left {
-        inset-inline-start: 22px;
-      }
-
-      .rover-wheel.right {
-        inset-inline-end: 22px;
-      }
-
-      @media (max-width: 34rem) {
-        .rover {
-          inset: auto 1rem 1rem auto;
-          scale: 0.75;
-          transform-origin: bottom right;
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        body {
-          background-position: 0 0;
+      @media (prefers-reduced-motion: no-preference) {
+        article {
+          animation: enter 0.5s cubic-bezier(0.2, 0, 0, 1) both;
         }
 
-        body::before {
-          display: none;
-        }
-
-        .rover-pupil {
-          translate: 0;
+        @keyframes enter {
+          from {
+            opacity: 0;
+            translate: 0 0.75rem;
+          }
+          to {
+            opacity: 1;
+            translate: 0;
+          }
         }
       }
 
       @media (forced-colors: active) {
-        body {
-          background-image: none;
+        .home-link {
+          background: ButtonFace;
+          color: ButtonText;
+          border: 1px solid ButtonText;
         }
 
-        .home-link {
-          color: ButtonText;
-          background: ButtonFace;
+        .home-link:focus-visible {
+          outline-color: Highlight;
         }
       }
     </style>
   </head>
   <body>
     <main>
-      <section class="content" aria-labelledby="page-title">
-        <p class="status">System message: 404</p>
-        <span class="error-code" aria-hidden="true">404</span>
-        <h1 id="page-title">This level has not loaded.</h1>
-        <p class="message">
-          The page may have moved, or this path never existed. The rover is
-          looking around, but the way home is more reliable.
+      <article aria-labelledby="page-title">
+        <p class="eyebrow">Error 404</p>
+        <h1 id="page-title">This page is not here.</h1>
+        <p>
+          The link may be outdated or the page may have moved. Return to my
+          portfolio to find your way back.
         </p>
-        <a class="home-link" href="/">Back to portfolio</a>
-      </section>
+        <a class="home-link" href="/">Back to the portfolio</a>
+      </article>
     </main>
-
-    <div class="rover" aria-hidden="true">
-      <span class="rover-body"></span>
-      <span class="rover-eye left"><span class="rover-pupil"></span></span>
-      <span class="rover-eye right"><span class="rover-pupil"></span></span>
-      <span class="rover-wheel left"></span>
-      <span class="rover-wheel right"></span>
-    </div>
-
-    <script>
-      const root = document.documentElement;
-      const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-      document.addEventListener("pointermove", (event) => {
-        if (motionQuery.matches) return;
-        const offsetX = event.clientX - window.innerWidth / 2;
-        const offsetY = event.clientY - window.innerHeight / 2;
-        const clamp = (value, limit) => Math.max(-limit, Math.min(limit, value));
-
-        root.style.setProperty("--pointer-x", `${event.clientX}px`);
-        root.style.setProperty("--pointer-y", `${event.clientY}px`);
-        root.style.setProperty("--grid-x", `${-event.clientX * 0.035}px`);
-        root.style.setProperty("--grid-y", `${-event.clientY * 0.035}px`);
-        root.style.setProperty("--look-x", `${clamp(offsetX / 45, 4)}px`);
-        root.style.setProperty("--look-y", `${clamp(offsetY / 45, 4)}px`);
-      });
-    </script>
   </body>
 </html>
