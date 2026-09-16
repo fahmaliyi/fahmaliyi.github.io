@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
-    <title>Page not found · Fahmi Aliyi</title>
+    <title>404 · This page does not exist · Fahmi Aliyi</title>
     <style>
       :root {
         color-scheme: light dark;
@@ -18,32 +18,33 @@
           oklch(0.78 0.005 80)
         );
         --color-border: light-dark(oklch(0.9 0.002 80), oklch(0.24 0.004 80));
-        --color-surface-card: light-dark(#ffffff, #0b0b0b);
         --color-accent: light-dark(oklch(0.55 0.15 260), oklch(0.65 0.15 260));
         --color-selection-bg: light-dark(
           oklch(0.92 0.04 260),
           oklch(0.25 0.04 260)
         );
+        --space-xs: 0.25rem;
         --space-sm: 0.5rem;
         --space-md: 1rem;
         --space-lg: 1.5rem;
         --space-xl: 2rem;
-        --space-2xl: 3rem;
       }
 
       *,
       *::before,
       *::after {
         box-sizing: border-box;
+        margin: 0;
+        padding: 0;
       }
 
       body {
+        position: relative;
         display: grid;
         min-block-size: 100vh;
+        min-block-size: 100dvh;
         place-items: center;
-        margin: 0;
-        padding: var(--space-lg);
-        background: var(--color-bg);
+        background-color: var(--color-bg);
         color: var(--color-text-primary);
         font-family:
           system-ui,
@@ -51,64 +52,130 @@
           BlinkMacSystemFont,
           "Segoe UI",
           sans-serif;
-        font-size: 1.125rem;
+        font-size: 1rem;
         line-height: 1.5;
+        padding: var(--space-lg);
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
       }
 
-      main {
-        inline-size: min(100%, 42rem);
+      /* ============================================
+         BACKGROUND CANVAS (LIQUID TEXT REVEAL)
+         ============================================ */
+      #bg-canvas {
+        position: fixed;
+        inset: 0;
+        inline-size: 100%;
+        block-size: 100%;
+        pointer-events: none;
+        z-index: 1;
       }
 
-      article {
-        padding: clamp(var(--space-xl), 7vw, var(--space-2xl));
-        border: 1px solid var(--color-border);
-        border-radius: 12px;
-        background: var(--color-surface-card);
+      /* ============================================
+         BRAND LOGO / TOP LEFT
+         ============================================ */
+      .site-header {
+        position: absolute;
+        inset-block-start: clamp(1.25rem, 3vw, 2rem);
+        inset-inline-start: clamp(1.25rem, 3vw, 2rem);
+        z-index: 2;
       }
 
-      .eyebrow {
-        margin: 0 0 var(--space-sm);
-        color: var(--color-text-secondary);
-        font-size: 0.875rem;
-        font-weight: 600;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      h1 {
-        margin: 0;
-        font-size: clamp(2rem, 8vw, 3.5rem);
-        line-height: 1.1;
-        letter-spacing: -0.04em;
-        text-wrap: balance;
-      }
-
-      p {
-        max-inline-size: 35rem;
-        margin: var(--space-md) 0 0;
-        color: var(--color-text-secondary);
-        text-wrap: pretty;
-      }
-
-      .home-link {
+      .brand-logo {
         display: inline-flex;
         align-items: center;
-        min-block-size: 2.75rem;
-        margin-top: var(--space-xl);
-        padding: 0.5rem 0.875rem;
-        border-radius: 6px;
-        background: var(--color-text-primary);
-        color: var(--color-bg);
-        font-size: 1rem;
+        gap: 0.625rem;
+        font-size: 0.9375rem;
         font-weight: 600;
+        letter-spacing: -0.01em;
+        color: var(--color-text-primary);
         text-decoration: none;
         transition: opacity 0.2s ease;
       }
 
+      .brand-avatar {
+        inline-size: 1.75rem;
+        block-size: 1.75rem;
+        border-radius: 6px;
+        object-fit: cover;
+        background-color: var(--color-border);
+        flex-shrink: 0;
+      }
+
+      .brand-logo:hover {
+        opacity: 0.7;
+      }
+
+      .brand-logo:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 3px;
+        border-radius: 6px;
+      }
+
+      /* ============================================
+         MAIN CONTENT
+         ============================================ */
+      main {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-inline-size: 28rem;
+        width: 100%;
+        margin-block: auto;
+      }
+
+      .error-code {
+        display: block;
+        font-size: clamp(3.5rem, 10vw, 5.5rem);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.04em;
+        color: var(--color-text-primary);
+        user-select: none;
+      }
+
+      .error-subtitle {
+        margin-block-start: var(--space-sm);
+        color: var(--color-text-secondary);
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.4;
+        text-wrap: balance;
+      }
+
+      /* ============================================
+         ACTION BUTTON
+         ============================================ */
+      .home-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-block-size: 2.25rem;
+        margin-block-start: var(--space-lg);
+        padding: 0.5rem 1.25rem;
+        border-radius: 9999px;
+        background-color: var(--color-text-primary);
+        color: var(--color-bg);
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        text-decoration: none;
+        transition:
+          opacity 0.2s ease,
+          transform 0.15s ease;
+      }
+
       .home-link:hover {
-        opacity: 0.82;
+        opacity: 0.85;
+        transform: translateY(-1px);
+      }
+
+      .home-link:active {
+        transform: translateY(0);
       }
 
       .home-link:focus-visible {
@@ -117,23 +184,26 @@
       }
 
       ::selection {
-        background: var(--color-selection-bg);
+        background-color: var(--color-selection-bg);
         color: var(--color-text-primary);
       }
 
+      /* ============================================
+         ANIMATION
+         ============================================ */
       @media (prefers-reduced-motion: no-preference) {
-        article {
-          animation: enter 0.5s cubic-bezier(0.2, 0, 0, 1) both;
+        main {
+          animation: enter 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
         @keyframes enter {
           from {
             opacity: 0;
-            translate: 0 0.75rem;
+            transform: translateY(0.75rem);
           }
           to {
             opacity: 1;
-            translate: 0;
+            transform: translateY(0);
           }
         }
       }
@@ -152,16 +222,270 @@
     </style>
   </head>
   <body>
-    <main>
-      <article aria-labelledby="page-title">
-        <p class="eyebrow">Error 404</p>
-        <h1 id="page-title">This page is not here.</h1>
-        <p>
-          The link may be outdated or the page may have moved. Return to my
-          portfolio to find your way back.
-        </p>
-        <a class="home-link" href="/">Back to the portfolio</a>
-      </article>
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+    <header class="site-header">
+      <a href="/" class="brand-logo" aria-label="Fahmi Aliyi - Home">
+        <img src="assets/profile.jpg" alt="" class="brand-avatar" />
+        <span>Fahmi Aliyi</span>
+      </a>
+    </header>
+
+    <main id="main-content" aria-labelledby="error-title">
+      <h1 id="error-title" class="error-code">404</h1>
+      <p class="error-subtitle">This page does not exist.</p>
+      <a class="home-link" href="/">Back to portfolio</a>
     </main>
+
+    <script>
+      (function () {
+        const canvas = document.getElementById("bg-canvas");
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+
+        const faintCanvas = document.createElement("canvas");
+        const faintCtx = faintCanvas.getContext("2d");
+
+        const brightCanvas = document.createElement("canvas");
+        const brightCtx = brightCanvas.getContext("2d");
+
+        const trailCanvas = document.createElement("canvas");
+        const trailCtx = trailCanvas.getContext("2d");
+
+        const revealCanvas = document.createElement("canvas");
+        const revealCtx = revealCanvas.getContext("2d");
+
+        const words = [
+          "404",
+          "NOT FOUND",
+          "404",
+          "LOST",
+          "404",
+          "ERROR",
+          "404",
+          "VOID",
+          "404",
+          "NULL",
+        ];
+        let width = 0;
+        let height = 0;
+        let dpr = 1;
+
+        // Trail points with liquid decay
+        const trail = [];
+        let lastPos = null;
+        let currentPos = { x: -1000, y: -1000 };
+        let smoothedPos = { x: -1000, y: -1000 };
+        let isHovering = false;
+
+        const isDarkTheme = () =>
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+        function resize() {
+          dpr = Math.min(window.devicePixelRatio || 1, 2);
+          width = window.innerWidth;
+          height = window.innerHeight;
+
+          [
+            canvas,
+            faintCanvas,
+            brightCanvas,
+            trailCanvas,
+            revealCanvas,
+          ].forEach((c) => {
+            c.width = width * dpr;
+            c.height = height * dpr;
+          });
+
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          faintCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          brightCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          trailCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          revealCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+          renderTextLayers();
+        }
+
+        function renderTextLayers() {
+          const dark = isDarkTheme();
+          const faintColor = dark
+            ? "rgba(255, 255, 255, 0.03)"
+            : "rgba(0, 0, 0, 0.025)";
+          const brightColor = dark
+            ? "rgba(255, 255, 255, 0.42)"
+            : "rgba(18, 18, 18, 0.38)";
+
+          faintCtx.clearRect(0, 0, width, height);
+          brightCtx.clearRect(0, 0, width, height);
+
+          const fontSize = 8;
+          const font = `500 ${fontSize}px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace`;
+
+          faintCtx.font = font;
+          faintCtx.fillStyle = faintColor;
+          faintCtx.textAlign = "center";
+          faintCtx.textBaseline = "middle";
+
+          brightCtx.font = font;
+          brightCtx.fillStyle = brightColor;
+          brightCtx.textAlign = "center";
+          brightCtx.textBaseline = "middle";
+
+          const stepX = 36;
+          const stepY = 16;
+          const cols = Math.ceil(width / stepX) + 2;
+          const rows = Math.ceil(height / stepY) + 2;
+
+          let wordIndex = 0;
+
+          for (let r = 0; r < rows; r++) {
+            const offsetX = (r % 2) * (stepX * 0.5);
+            const y = r * stepY;
+
+            for (let c = 0; c < cols; c++) {
+              const x = c * stepX + offsetX;
+              const text = words[wordIndex % words.length];
+              wordIndex++;
+
+              faintCtx.fillText(text, x, y);
+              brightCtx.fillText(text, x, y);
+            }
+          }
+        }
+
+        function addTrailPoint(x, y) {
+          trail.push({
+            x,
+            y,
+            radius: 70,
+            maxAge: 36,
+            age: 0,
+          });
+        }
+
+        function interpolatePoints(p1, p2) {
+          const dx = p2.x - p1.x;
+          const dy = p2.y - p1.y;
+          const dist = Math.hypot(dx, dy);
+          const step = 8;
+          const count = Math.floor(dist / step);
+
+          for (let i = 1; i <= count; i++) {
+            const t = i / (count + 1);
+            addTrailPoint(p1.x + dx * t, p1.y + dy * t);
+          }
+        }
+
+        function onPointerMove(e) {
+          const x = e.clientX;
+          const y = e.clientY;
+          isHovering = true;
+          currentPos = { x, y };
+
+          if (!lastPos) {
+            lastPos = { x, y };
+            smoothedPos = { x, y };
+            addTrailPoint(x, y);
+            return;
+          }
+
+          interpolatePoints(lastPos, { x, y });
+          addTrailPoint(x, y);
+          lastPos = { x, y };
+        }
+
+        function onPointerLeave() {
+          isHovering = false;
+          lastPos = null;
+        }
+
+        window.addEventListener("pointermove", onPointerMove, {
+          passive: true,
+        });
+        window.addEventListener("pointerdown", onPointerMove, {
+          passive: true,
+        });
+        window.addEventListener("pointerleave", onPointerLeave, {
+          passive: true,
+        });
+
+        if (window.matchMedia) {
+          window
+            .matchMedia("(prefers-color-scheme: dark)")
+            .addEventListener("change", renderTextLayers);
+        }
+
+        window.addEventListener("resize", resize, { passive: true });
+        resize();
+
+        // Animation Loop with liquid dissipation
+        function loop() {
+          // Liquid spring follower for cursor
+          if (isHovering && currentPos.x >= 0) {
+            smoothedPos.x += (currentPos.x - smoothedPos.x) * 0.35;
+            smoothedPos.y += (currentPos.y - smoothedPos.y) * 0.35;
+            addTrailPoint(smoothedPos.x, smoothedPos.y);
+          }
+
+          // Clear main canvas
+          ctx.clearRect(0, 0, width, height);
+
+          // 1. Draw base faint text grid (always visible as subtle background hint)
+          ctx.drawImage(faintCanvas, 0, 0, width, height);
+
+          // 2. Process and draw liquid trail reveal
+          if (trail.length > 0) {
+            trailCtx.clearRect(0, 0, width, height);
+
+            // Draw radial fluid gradients for each trail particle
+            for (let i = trail.length - 1; i >= 0; i--) {
+              const p = trail[i];
+              p.age++;
+
+              if (p.age >= p.maxAge) {
+                trail.splice(i, 1);
+                continue;
+              }
+
+              const progress = p.age / p.maxAge;
+              const alpha = (1 - progress) * (1 - progress); // ease-out decay
+              const currentRadius = p.radius * (0.8 + 0.4 * progress); // fluid expansion
+
+              const grad = trailCtx.createRadialGradient(
+                p.x,
+                p.y,
+                0,
+                p.x,
+                p.y,
+                currentRadius,
+              );
+              grad.addColorStop(0, `rgba(255, 255, 255, ${alpha * 0.7})`);
+              grad.addColorStop(0.5, `rgba(255, 255, 255, ${alpha * 0.25})`);
+              grad.addColorStop(1, "rgba(255, 255, 255, 0)");
+
+              trailCtx.fillStyle = grad;
+              trailCtx.beginPath();
+              trailCtx.arc(p.x, p.y, currentRadius, 0, Math.PI * 2);
+              trailCtx.fill();
+            }
+
+            // 3. Mask bright text layer using the liquid trail
+            revealCtx.clearRect(0, 0, width, height);
+            revealCtx.globalCompositeOperation = "source-over";
+            revealCtx.drawImage(brightCanvas, 0, 0, width, height);
+            revealCtx.globalCompositeOperation = "destination-in";
+            revealCtx.drawImage(trailCanvas, 0, 0, width, height);
+
+            // 4. Composite the revealed bright text onto the main canvas
+            ctx.drawImage(revealCanvas, 0, 0, width, height);
+          }
+
+          requestAnimationFrame(loop);
+        }
+
+        requestAnimationFrame(loop);
+      })();
+    </script>
   </body>
 </html>
